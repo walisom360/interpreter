@@ -25,7 +25,7 @@ void printVariable(const std::string &varName)
     if (variables.find(varName) != variables.end())
     {
         const Variable &var = variables[varName];
-        std::cout << "Valor de " << varName << " (" << var.type << "): ";
+        std::cout << "Value of " << varName << " (" << var.type << "): ";
 
         if (std::holds_alternative<int>(var.value))
         {
@@ -44,7 +44,7 @@ void printVariable(const std::string &varName)
     }
     else
     {
-        std::cerr << "Erro: variável " << varName << " não definida.\n";
+        std::cerr << "Error: variable " << varName << " not defined.\n";
     }
 }
 
@@ -88,7 +88,7 @@ void interpreter(const string &line, int &currentLine)
                 }
                 else
                 {
-                    std::cerr << "Erro de sintaxe: string não fechada.\n";
+                    std::cerr << "Syntax Error: string not closed.\n";
                 }
             }
 
@@ -108,7 +108,7 @@ void interpreter(const string &line, int &currentLine)
             else
             {
 
-                std::cerr << "Erro de sintaxe: esperado um identificador ou string após PRINT.\n";
+                std::cerr << "Syntax Error: expected identifir or string after PRINT.\n";
             }
         }
 
@@ -134,7 +134,7 @@ void interpreter(const string &line, int &currentLine)
             }
             else
             {
-                std::cerr << "Erro de sintaxe: esperado um nome de variável após LET.\n";
+                std::cerr << "Syntax Error: expected a varirable after LET.\n";
                 return;
             }
 
@@ -172,7 +172,7 @@ void interpreter(const string &line, int &currentLine)
                     }
                     else
                     {
-                        std::cerr << "Erro de sintaxe: string não fechada.\n";
+                        std::cerr << "Syntax Error: string not closed.\n";
                     }
                 }
                 else if (isdigit(line[i]) || line[i] == '-')
@@ -204,12 +204,12 @@ void interpreter(const string &line, int &currentLine)
 
                 else
                 {
-                    std::cerr << "Erro de sintaxe: valor inválido.\n";
+                    std::cerr << "Syntax Error: Invalid value.\n";
                 }
             }
             else
             {
-                std::cerr << "Erro de sintaxe: esperado '=' após nome da variável. Posição: " << i << " -> " << line[i] << std::endl;
+                std::cerr << "Syntax Error: expected '=' after variable name. Position: " << i << " -> " << line[i] << std::endl;
             }
         }
 
@@ -233,11 +233,11 @@ void interpreter(const string &line, int &currentLine)
             }
             else
             {
-                std::cerr << "Erro de sintaxe: esperado um nome de variável após INPUT.\n";
+                std::cerr << "Syntax Error: expected variable name after INPUT.\n";
                 return;
             }
 
-            std::cout << "Digite um valor para " << varName << ": ";
+            std::cout << "Enter a valuer for " << varName << ": ";
             std::string input;
             std::getline(std::cin, input);
 
@@ -275,7 +275,7 @@ void interpreter(const string &line, int &currentLine)
             }
             else
             {
-                std::cerr << "Erro de sintaxe: esperado uma variável.\n";
+                std::cerr << "Syntax Error: expected a variable.\n";
                 return;
             }
 
@@ -291,7 +291,7 @@ void interpreter(const string &line, int &currentLine)
             }
             else
             {
-                std::cerr << "Erro de sintaxe: esperado um operador de comparação.\n";
+                std::cerr << "Syntax Error: expected comparar operator.\n";
                 return;
             }
 
@@ -307,7 +307,7 @@ void interpreter(const string &line, int &currentLine)
             }
             else
             {
-                std::cerr << "Erro de sintaxe: esperado uma segunda variável.\n";
+                std::cerr << "Syntax Error: expected second variable.\n";
                 return;
             }
 
@@ -322,7 +322,7 @@ void interpreter(const string &line, int &currentLine)
             }
             else
             {
-                std::cerr << "Erro de sintaxe: esperado 'THEN'.\n";
+                std::cerr << "Syntax Error: expected 'THEN'.\n";
                 return;
             }
 
@@ -355,7 +355,7 @@ void interpreter(const string &line, int &currentLine)
                     }
                     else
                     {
-                        std::cerr << "Erro de sintaxe: esperado fechamento de aspas.\n";
+                        std::cerr << "Syntax Error: expected closing by quotation marks.\n";
                         return;
                     }
 
@@ -375,17 +375,17 @@ void interpreter(const string &line, int &currentLine)
                     }
                     else
                     {
-                        std::cout << "Condição falsa! Nenhuma ação tomada.\n";
+                        std::cout << "false wave! No action taken.\n";
                     }
                 }
                 else
                 {
-                    std::cerr << "Erro de sintaxe: esperado uma mensagem entre aspas após PRINT.\n";
+                    std::cerr << "Syntax error: expected message in quotes after PRINT.\n";
                 }
             }
             else
             {
-                std::cerr << "Erro de sintaxe: esperado 'PRINT' após 'THEN'.\n";
+                std::cerr << "Syntax error: Expected 'PRINT' after 'THEN'.\n";
             }
         }
 
@@ -406,7 +406,7 @@ void interpreter(const string &line, int &currentLine)
             }
             else
             {
-                std::cerr << "Erro: Label " << targetLabel << " não encontrada.\n";
+                std::cerr << "Error: Label " << targetLabel << " dont find.\n";
             }
         }
 
@@ -435,7 +435,7 @@ int main()
 
     if (!file.is_open())
     {
-        std::cerr << "Erro ao abrir o arquivo: " << filename << std::endl;
+        std::cerr << "error when opening the program: " << filename << std::endl;
         return 1;
     }
 
