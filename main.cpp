@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <map>
 #include <vector>
 #include <string>
 #include <unordered_map>
@@ -16,6 +17,7 @@ struct Variable
     VariableValue value;
 };
 
+std::map<int, std::string> lines;
 std::unordered_map<std::string, Variable> variables;
 
 void printVariable(const std::string &varName)
@@ -46,7 +48,7 @@ void printVariable(const std::string &varName)
     }
 }
 
-void interpreter(const string &line)
+void interpreter(const string &line, int &currentLine)
 {
 
     string current;
@@ -386,35 +388,80 @@ void interpreter(const string &line)
                 std::cerr << "Erro de sintaxe: esperado 'PRINT' após 'THEN'.\n";
             }
         }
+
+        else if (line.substr(i, 4) == "GOTO")
+        {
+            i += 4;
+
+            while (i < line.size() && isspace(line[i]))
+            {
+                i++;
+            }
+
+            int targetLabel = std::stoi(line.substr(i));
+            if (lines.find(targetLabel) != lines.end())
+            {
+                currentLine = targetLabel;
+                return;
+            }
+            else
+            {
+                std::cerr << "Erro: Label " << targetLabel << " não encontrada.\n";
+            }
+        }
+
+        auto it = lines.find(currentLine);
+        if (it != lines.end())
+        {
+            ++it;
+            if (it != lines.end())
+            {
+                currentLine = it->first;
+            }
+            else
+            {
+                currentLine = -1;
+            }
+        }
     }
 }
 
 int main()
 {
-    vector<string> buffer;
+    std::vector<std::string> buffer;
 
-    string filename = "program.basic";
-
-    ifstream file(filename);
+    std::string filename = "program.basic";
+    std::ifstream file(filename);
 
     if (!file.is_open())
     {
-        cerr << "Erro ao abrir o arquivo: " << filename << endl;
-        return false;
+        std::cerr << "Erro ao abrir o arquivo: " << filename << std::endl;
+        return 1;
     }
 
-    string line;
-    while (getline(file, line))
+    std::string line;
+    while (std::getline(file, line))
     {
         buffer.push_back(line);
     }
 
+    file.close();
+
     for (const auto &line : buffer)
     {
-        interpreter(line);
+        size_t pos = line.find(' ');
+        if (pos != std::string::npos)
+        {
+            int label = std::stoi(line.substr(0, pos));
+            lines[label] = line.substr(pos + 1);
+        }
     }
 
-    file.close();
+    int currentLine = lines.begin()->first;
+    while (lines.find(currentLine) != lines.end())
+    {
+        interpreter(lines[currentLine], currentLine);
+    }
 
     return 0;
 }

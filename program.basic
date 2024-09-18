@@ -9,14 +9,10 @@
 90 INPUT C
 100 PRINT C
 110 IF A > B THEN PRINT "alguma coisa"
-120 LET G = A + B
-130 LET F = A - B
-140 LET Z = A * B
-150 LET P = A / B
-160 PRINT G
-170 PRINT F
-180 PRINT Z
-190 PRINT P
-200 GOTO 220
+200 GOTO 260
 210 PRINT "passou aki"
-220 PRINT "veio do goto 200"
+220 PRINT "pula"
+230 PRINT "pula"
+240 PRINT "pula"
+250 PRINT "pula"
+260 PRINT "veio do goto 200"
