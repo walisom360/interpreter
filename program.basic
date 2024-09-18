@@ -1,0 +1,22 @@
+10 PRINT "Hello World 1"
+20 PRINT "Hello World 2"
+30 PRINT "Hello World 3"
+40 PRINT "Hello World 4"
+50 LET BAB = 123
+60 LET A = 10
+70 LET B = 5
+80 PRINT BAB
+90 INPUT C
+100 PRINT C
+110 IF A > B THEN PRINT "alguma coisa"
+120 LET G = A + B
+130 LET F = A - B
+140 LET Z = A * B
+150 LET P = A / B
+160 PRINT G
+170 PRINT F
+180 PRINT Z
+190 PRINT P
+200 GOTO 220
+210 PRINT "passou aki"
+220 PRINT "veio do goto 200"
